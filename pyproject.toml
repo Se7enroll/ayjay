@@ -1,7 +1,7 @@
 [project]
 name = "ayjay"
 version = "0.1.0"
-description = "Add your description here"
+description = "Small package for getting cached API requests with propper error handling."
 authors = [
     { name = "Tobias Schnack", email = "tobias.schnack@gmail.com" }
 ]
@@ -22,6 +22,7 @@ managed = true
 dev-dependencies = [
     "pytest>=8.1.1",
     "pytest-mock>=3.14.0",
+    "requests-mock>=1.12.1",
 ]
 
 [tool.hatch.metadata]
