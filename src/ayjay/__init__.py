@@ -124,6 +124,6 @@ class AyJay:
                     self.cache[key] = original_func(*args, **kwargs)
                 return self.cache[key]
             else:
-                original_func(*args, **kwargs)
+                return original_func(*args, **kwargs)
 
         return cached_func
