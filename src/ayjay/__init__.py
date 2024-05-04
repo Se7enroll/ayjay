@@ -45,6 +45,8 @@ class AyJay:
                 self.cache = Cache(file_path + "ayjay_cache.dat")
             except (IOError, ValueError):
                 self.cache = {}
+        else:
+            self.cache = {}
 
     def call_api_raw(
         self, request_type: str, endpoint: str, payload: dict | str = None
@@ -91,13 +93,17 @@ class AyJay:
         :return: Response. Type - JSON Formatted String
         """
         if isinstance(params, dict):
-            response = self._cache(
-                self.call_api_raw(
+            key = endpoint + str(params)
+            if not self.disable_caching or key not in self.cache:
+                response = self.call_api_raw(
                     request_type=RequestType.GET.value,
                     endpoint=endpoint,
                     payload=params,
                 )
-            )
+                self.cache[key] = response
+            else:
+                response = self.cache[key]
+
         else:
             raise ValueError("ERROR - Parameter 'params' should be of Type Dict")
         return response
@@ -115,15 +121,3 @@ class AyJay:
         else:
             raise ValueError("ERROR - Parameter 'payload' should be of Type Dict")
         return response
-
-    def _cache(self, original_func):
-        def cached_func(*args, **kwargs):
-            if not self.disable_caching:
-                key = original_func.__name__ + str(args) + str(kwargs)
-                if key not in self.cache:
-                    self.cache[key] = original_func(*args, **kwargs)
-                return self.cache[key]
-            else:
-                return original_func(*args, **kwargs)
-
-        return cached_func

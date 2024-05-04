@@ -1,6 +1,6 @@
 [project]
 name = "ayjay"
-version = "0.1.0"
+version = "0.1.1"
 description = "Small package for getting cached API requests with propper error handling."
 authors = [
     { name = "Tobias Schnack", email = "tobias.schnack@gmail.com" }

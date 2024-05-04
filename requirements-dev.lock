@@ -12,6 +12,8 @@ certifi==2024.2.2
     # via requests
 charset-normalizer==3.3.2
     # via requests
+colorama==0.4.6
+    # via pytest
 diskcache==5.6.3
     # via ayjay
 idna==3.6
